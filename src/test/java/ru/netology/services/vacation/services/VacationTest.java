@@ -2,50 +2,21 @@ package ru.netology.services.vacation.services;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class VacationTest {
 
-    @Test
-    void Ex1() {
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/rest.csv")
+    void Ex1(int expected, int income, int expenses, int threshold) {
         Vacation service = new Vacation();
 
-        int expected = 3;
+        //int expected = 3;
 
-        int actual = service.calculateMonthsForRest(10000, 3000, 20000);
+        int actual = service.calculateMonthsForRest(income, expenses, threshold);
         Assertions.assertEquals(expected, actual);
         System.out.println("Количество месяцев для отдыха: " + actual);
     }
 
-    @Test
-    void Ex2() {
-        Vacation service = new Vacation();
-
-        int expected = 2;
-
-        int actual = service.calculateMonthsForRest(100000, 60000, 150000);
-        Assertions.assertEquals(expected, actual);
-        System.out.println("Количество месяцев для отдыха: " + actual);
-    }
-
-    /*@Test
-    void alwaysRest() {
-        Vacation service = new Vacation();
-
-        int expected = 12;
-
-        int actual = service.calculateMonthsForRest(1, 0, 0);
-        Assertions.assertEquals(expected, actual);
-        System.out.println("Количество месяцев для отдыха: " + actual);
-    }
-
-    @Test
-    void alwaysWork() {
-        Vacation service = new Vacation();
-
-        int expected = 0;
-
-        int actual = service.calculateMonthsForRest(1, 1, 10);
-        Assertions.assertEquals(expected, actual);
-        System.out.println("Количество месяцев для отдыха: " + actual);
-    }*/
 }
